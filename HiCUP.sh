@@ -48,14 +48,15 @@ ${txtbld}OPTIONS${txtrst}:
 EOF
 }
 
-file="a_1.fq,a_2.fq:b_1.fq,b_2.fq:c_1.fq,c_2.fq"
+#file="a_1.fastq,a_2.fastq b_1.fastq,b_2.fastq c_1.fastq,c_2.fastq"
+file=""
 output=
 threads=8
 supress=0
 retain=0
 compress=0
-bowtie="/home/baowen/softwares/bowtie2-2.2.5/bowtie2"
-index="/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome"
+bowtie= "/home/baowen/softwares/bowtie2-2.2.5/bowtie2"
+index= "/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome"
 digest=
 format="Sanger"
 max=800
@@ -111,15 +112,17 @@ do
 	esac
 done
 
-if [ -z $file ]; then
+if [ -z "$file" ]; then
 	usage
 	exit 1
 fi
 
-#file="a_1.fq,a_2.fq:b_1.fq,b_2.fq:c_1.fq,c_2.fq"
-fileL=`echo ${file} | sed -e 's/,/\n/g' -e 's/:/\n\n/g'`
+fileL=`echo ${file} | sed -e 's/,/\n/g' -e 's/ /\n\n/g'`
 
 cat <<END > hicup.conf
+
+#Example configuration file for the hicup Perl script - edit as required
+########################################################################
 
 #Directory to which output files should be written (optional parameter)
 #Set to current working directory by default

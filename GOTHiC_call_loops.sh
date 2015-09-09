@@ -153,7 +153,7 @@ do
 	esac
 done
 
-if [ -z $file1 ]; then
+if [ -z $file1 ] || [ -z ${file2} ]; then
 	usage
 	exit 1
 fi
@@ -171,7 +171,7 @@ mapped <- mapReadsToRestrictionSites(paired, sampleName='${name}',
 	  restrictionSite='${restrictionSite}', enzyme='${enzyme}',
 	  parallel=${parallel}, cores=${cores})   
 
-pdf(file="${name}.pvalue.pdf", width=600, height=800)
+#pdf(file="${name}.pvalue.pdf", width=600, height=800)
 
 binom <- GOTHiC(mapped, sampleName='${name}', res=${resolution},
 	 cistrans='${cistrans}', filterdist=${filterdist})

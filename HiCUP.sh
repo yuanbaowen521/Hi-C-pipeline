@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #set -x
-set -e
-set -u
 
 usage()
 {
@@ -40,6 +38,7 @@ ${txtbld}OPTIONS${txtrst}:
 		/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Seq
 		uence/Bowtie2Index/genome]${txtrst} 	
 	-d	Path to the genome digest file produced by hicup_digester
+		${bldred}[NECESSARY]${txtrst}
 	-F	FASTQ format (valid formats: 'Sanger',
 		'Solexa_Illumina_1.0', 'Illumina_1.3' or 'Illumina_1.5')
 		${bldred}[Default Sanger]${txtrst}

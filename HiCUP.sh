@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #set -x
+#set -u
+#set -e
 
 usage()
 {
@@ -48,20 +50,22 @@ EOF
 }
 
 #file="a_1.fastq,a_2.fastq b_1.fastq,b_2.fastq c_1.fastq,c_2.fastq"
-file=""
+file=
 output=
 threads=8
 supress=0
 retain=0
 compress=0
-bowtie= "/home/baowen/softwares/bowtie2-2.2.5/bowtie2"
-index= "/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome"
-digest=
-format="Sanger"
+bowtie= '/home/baowen/softwares/bowtie2-2.2.5/bowtie2'
+index='/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome'
+#bowtie=''
+#index=''
+digest=''
+format='Sanger'
 max=800
 min=150
 
-while getopts "hf:z:" OPTION
+while getopts "hf:o:p:s:r:c:b:i:d:F:m:n:" OPTION
 do
 	case $OPTION in
 		h)
@@ -119,7 +123,6 @@ fi
 fileL=`echo ${file} | sed -e 's/,/\n/g' -e 's/ /\n\n/g'`
 
 cat <<END > hicup.conf
-
 #Example configuration file for the hicup Perl script - edit as required
 ########################################################################
 

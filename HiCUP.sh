@@ -119,7 +119,7 @@ fi
 #file="a_1.fq,a_2.fq:b_1.fq,b_2.fq:c_1.fq,c_2.fq"
 fileL=`echo ${file} | sed -e 's/,/\n/g' -e 's/:/\n\n/g'`
 
-cat <<END > ${sample}.conf
+cat <<END > hicup.conf
 
 #Directory to which output files should be written (optional parameter)
 #Set to current working directory by default
@@ -161,3 +161,7 @@ Shortest: ${min}
 #FASTQ files to be analysed, placing paired files on adjacent lines
 ${fileL}
 
+END
+
+hicup --config hicup.conf
+if [ "$?" == "0" ]; then /bin/rm -f hicup.conf; fi

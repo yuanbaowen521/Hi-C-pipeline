@@ -21,7 +21,10 @@ This script is used to call the function of HiCUP.
 
 ${txtbld}OPTIONS${txtrst}:
 	-f	FASTQ files to be analysed, placing paired files
-		adjacent ${bldred}[NECESSARY]${txtrst}
+		adjacent in the format as listed bwlow (quotes are
+		needed):
+		"a_1.fastq,a_2.fastq b_1.fastq,b_2.fastq c_1.fastq,c_2.fastq"
+		${bldred}[NECESSARY]${txtrst}
     	-o	Directory to which output files should be
 		written ${bldred}[Default current directory]${txtrst}
 	-p	Number of threads to use ${bldred}[Default
@@ -50,17 +53,17 @@ EOF
 }
 
 #file="a_1.fastq,a_2.fastq b_1.fastq,b_2.fastq c_1.fastq,c_2.fastq"
-file=
-output=
+file=''
+output=''
 threads=8
 supress=0
 retain=0
 compress=0
-bowtie= '/home/baowen/softwares/bowtie2-2.2.5/bowtie2'
+bowtie='/home/baowen/softwares/bowtie2-2.2.5/bowtie2'
 index='/home/baowen/baowen/Genomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome'
 #bowtie=''
 #index=''
-digest=''
+digest='/home/baowen/baowen/Projects/hicup/Digest_hg19_MboI_None_12-54-53_03-09-2015.txt'
 format='Sanger'
 max=800
 min=150
@@ -143,7 +146,7 @@ Keep: ${retain}
 Zip: ${compress}
 
 #Path to the alignment program Bowtie (include the executable Bowtie filename)
-Bowtie: ${bowtie}
+Bowtie2: ${bowtie}
 
 #Path to the reference genome indices
 #Remember to include the basename of the genome indices

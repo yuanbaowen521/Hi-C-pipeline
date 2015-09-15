@@ -44,8 +44,7 @@ ${txtbld}OPTIONS${txtrst}:
 		uence/Bowtie2Index/genome]${txtrst} 	
 	-d	Path to the genome digest file produced by hicup_digester
 		${bldred}[Default
-		/home/baowen/baowen/Projects/hicup/Digest_hg19_HindIII_None_19-09-46_25-03-2015.txt]
-		${txtrst}
+		/home/baowen/baowen/Projects/hicup/Digest_hg19_HindIII_None_19-09-46_25-03-2015.txt]${txtrst}
 	-F	FASTQ format (valid formats: 'Sanger',
 		'Solexa_Illumina_1.0', 'Illumina_1.3' or 'Illumina_1.5')
 		${bldred}[Default Sanger]${txtrst}

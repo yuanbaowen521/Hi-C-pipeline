@@ -112,7 +112,7 @@ samtools view -bh -f 0x80 ${file} > ${name}_read2.bam
 echo "Begin to merge all the paired end reads into an initial tag directory"
 #since the HiCUP has already filtered and removed reads, so these steps are
 #skipped in this procedure.
-makeTagDirectory ${sample}_filtered ${file}
+makeTagDirectory ${sample}_filtered ${name}_read1.bam,${name}_read2.bam
 
 echo "Begin to create background models for Hi-C data, to save 
 important parameters from normalization so that the background model 

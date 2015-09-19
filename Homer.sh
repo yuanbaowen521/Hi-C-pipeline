@@ -14,7 +14,7 @@ $0 options${txtrst}
 
 ${bldblu}Function${txtrst}:
 
-This script is used to create and normalize contact matrix by homer.
+This script is used to create and normalize contact matrices by homer.
 
 The parameters for logical variable are either TRUE or FALSE.
 
@@ -26,9 +26,6 @@ The parameters for logical variable are either TRUE or FALSE.
 	-R	An integer of resolution. Represents how frequent the 
 		genome is divided up into regions, namely the binned size.
 		[${bldred}Default 1 Mb${txtrst}]
-	-S	An integer of superResolution. Represents how large the 
-		region is expanded when counting reads.[${bldred}Default 2
-		Mb${txtrst}]
 	-c	An integer shows the number of processors.
 		[${bldred}Default 8${txtrst}]
 	-N	A logical value. Outputs the ratio of observed to expected 
@@ -57,13 +54,12 @@ EOF
 file=
 sample=
 resolution=1000000
-superRes=2000000
 cpu=8
 norm=TRUE
 logp=
 corr=
 
-while getopts "hf:s:R:S:c:N:P:C:" OPTION
+while getopts "hf:F:s:R:c:N:P:C:" OPTION
 do
 	case $OPTION in
 		h)
@@ -71,16 +67,13 @@ do
 			exit 1
 			;;
 		f)
-			file=$OPTARG
+			file1=$OPTARG
 			;;
 		s)
 			sample=$OPTARG
 			;;
 		R)	
 			resolution=$OPTARG
-			;;
-		S)
-			superRes=$OPTARG
 			;;
 		c)	
 			cpu=$OPTARG
@@ -112,33 +105,54 @@ samtools view -bh -f 0x80 ${file} > ${name}_read2.bam
 echo "Begin to merge all the paired end reads into an initial tag directory"
 #since the HiCUP has already filtered and removed reads, so these steps are
 #skipped in this procedure.
-makeTagDirectory ${sample}_filtered ${name}_read1.bam,${name}_read2.bam
+
+makeTagDirectory ${sample}_filtered ${name}_read1.bam,${name}_read2.bam   
 
 echo "Begin to create background models for Hi-C data, to save 
 important parameters from normalization so that the background model 
 only has to be computed once for a given resolution."
+echo "analyzeHiC ${sample}_filtered/ -res ${resolution} -bgonly -cpu ${cpu}"
+
 analyzeHiC ${sample}_filtered/ -res ${resolution} -bgonly -cpu ${cpu}
 
 echo "Begin to create and normalize contact matrices"
 
 if test "${norm}" == 'TRUE'; then
     if test "${corr}" == 'TRUE'; then
-	analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
-	${superRes} ${norm} ${corr} > \
-	${sample}.${resolution}by${superRes}Resolution_${norm}_${corr}.txt
+	analyzeHiC ${sample}_filtered/ -res ${resolution} -norm -corr > \
+	${sample}.${resolution}Resolution_norm_corr.txt
     fi
-    analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
-    ${superRes} ${norm} > \
-    ${sample}.${resolution}by${superRes}Resolution_${norm}.txt
+    analyzeHiC ${sample}_filtered/ -res ${resolution} -norm > \
+    ${sample}.${resolution}Resolution_norm.txt
 fi 
 
 if test "${logp}" == 'TRUE'; then
     if test "${corr}" == 'TRUE'; then
-	analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
-	${superRes} ${logp} ${corr} > \
-	${sample}.${resolution}by${superRes}Resolution_${logp}_${corr}.txt
+	analyzeHiC ${sample}_filtered/ -res ${resolution} -logp -corr > \
+	${sample}.${resolution}Resolution_logp_corr.txt
     fi
-    analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
-    ${superRes} ${logp} > \
-    ${sample}.${resolution}by${superRes}Resolution_${logp}.txt
+    analyzeHiC ${sample}_filtered/ -res ${resolution} -logp > \
+    ${sample}.${resolution}Resolution_logp.txt
 fi
+
+#if test "${norm}" == 'TRUE'; then
+#    if test "${corr}" == 'TRUE'; then
+#	analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
+#	${superRes} \-${norm} \-${corr} > \
+#	${sample}.${resolution}by${superRes}Resolution_${norm}_${corr}.txt
+#    fi
+#    analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
+#    ${superRes} \-${norm} > \
+#    ${sample}.${resolution}by${superRes}Resolution_${norm}.txt
+#fi 
+#
+#if test "${logp}" == 'TRUE'; then
+#    if test "${corr}" == 'TRUE'; then
+#	analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
+#	${superRes} \-${logp} \-${corr} > \
+#	${sample}.${resolution}by${superRes}Resolution_${logp}_${corr}.txt
+#    fi
+#    analyzeHiC ${sample}_filtered/ -res ${resolution} -superRes \
+#    ${superRes} \-${logp} > \
+#    ${sample}.${resolution}by${superRes}Resolution_${logp}.txt
+#fi

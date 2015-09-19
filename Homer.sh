@@ -59,7 +59,7 @@ norm=TRUE
 logp=
 corr=
 
-while getopts "hf:F:s:R:c:N:P:C:" OPTION
+while getopts "hf:s:R:c:N:P:C:" OPTION
 do
 	case $OPTION in
 		h)
@@ -67,7 +67,7 @@ do
 			exit 1
 			;;
 		f)
-			file1=$OPTARG
+			file=$OPTARG
 			;;
 		s)
 			sample=$OPTARG

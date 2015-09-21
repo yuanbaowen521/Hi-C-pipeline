@@ -17,9 +17,9 @@ $0 options${txtrst}
 
 ${bldblu}Function${txtrst}:
 
-This script is used to call the function of GOTHiC_call_loops.sh,
-because the large data set, beyond the momery of server, so this
-script is designed to deal the genome by chromosomes.
+This script is used to call the function of GOTHiC_call_loops.sh to
+find chromatin interactions by chromosomes. This script is used when
+the large data set are beyond the momery of server.
 
 ${txtbld}OPTIONS${txtrst}:
 	-f	File containing the mapped paired end reads

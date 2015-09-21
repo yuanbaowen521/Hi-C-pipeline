@@ -14,13 +14,13 @@ Raw sequencing reads were processed, which maps the positions of
 di-tags against the genomes, filters out experimental artifacts, 
 such as circularized reads and re-ligations, and removes all 
 duplicate reads.
-
 A detailed document of HiCUP can be found at:
 http://www.bioinformatics.babraham.ac.uk/projects/hicup/overview/
 
 Step two:
 From the mapped reads to contact matrices and maps, this step utilize
-the software of ,,,
+the software of homer.(http://homer.salk.edu/homer/interactions/index.html)
+Homer can generate interaction matrices, and then do normalization. 
 
 Step three:
 From the mapped reads to list of significant interactions, which
@@ -46,8 +46,8 @@ From
 Prerequisite:
 To conduct the workflow, several softwares should be installed.
 1: HiCUP (http://www.bioinformatics.babraham.ac.uk/projects/download.html#hicup)
-2: A bioconductor package GOTHiC 
-3:
+2: The homer software
+3: A bioconductor package GOTHiC 
 4:
 
 

@@ -113,10 +113,12 @@ for i in $(echo `seq 1 1 22` X Y)
 do
     if test "${norm}" == 'TRUE'; then
 	if test "${corr}" == 'TRUE'; then
+	    mkdir -p norm_corr 
 	    analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
-	    ${resolution} -cpu ${cpu} - norm -corr \
+	    ${resolution} -cpu ${cpu} -norm -corr \
 	    > ${sample}_chr${i}_${resolution}_norm_corr.txt
 	fi
+	mkdir -p norm
 	analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	${resolution} -cpu ${cpu} -norm \
 	> ${sample}_chr${i}_${resolution}_norm.txt
@@ -124,10 +126,12 @@ do
 
     if test "${logp}" == 'TRUE'; then
 	if test "${corr}" == 'TRUE'; then
+	    mkdir -p logp_corr
 	    analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	    ${resolution} -cpu ${cpu} -logp -corr \
 	    > ${sample}_chr${i}_${resolution}_logp_corr.txt
 	fi
+	mkdir -p logp
 	analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	${resolution} -cpu ${cpu} -logp \
 	> ${sample}_chr${i}_${resolution}_logp.txt

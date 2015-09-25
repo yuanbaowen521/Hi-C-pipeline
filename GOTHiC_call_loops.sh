@@ -185,5 +185,6 @@ sep="\t", quote=FALSE)
 END
 
 Rscript ${name}.r
-if [ "$?" == "0" ]; then /bin/rm -f ${name}.r; fi
+/bin/rm -f ${name}.r
+#if [ "$?" == "0" ]; then /bin/rm -f ${name}.r; fi
 

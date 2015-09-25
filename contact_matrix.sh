@@ -110,6 +110,8 @@ echo "Begin to merge all the paired end reads into an initial tag directory"
 #skipped in this procedure.
 makeTagDirectory ${sample}_filtered ${file1},${file2}   
 
+mkdir -p norm norm_corr logp logp_corr
+
 echo "Begin to create and normalize contact matrices by chromosomes"
 
 for i in $(echo `seq 1 1 22` X Y)
@@ -117,23 +119,23 @@ do
     if test "${norm}" == 'TRUE'; then
 	if test "${corr}" == 'TRUE'; then
 	    analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
-	    ${resolution} -cpu ${cpu} - norm -corr \
-	    > ${sample}_chr${i}_${resolution}_norm_corr.txt
+	    ${resolution} -cpu ${cpu} -norm -corr \
+	    > norm_corr/${sample}_chr${i}_${resolution}_norm_corr.txt
 	fi
 	analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	${resolution} -cpu ${cpu} -norm \
-	> ${sample}_chr${i}_${resolution}_norm.txt
+	> norm/${sample}_chr${i}_${resolution}_norm.txt
     fi 
 
     if test "${logp}" == 'TRUE'; then
 	if test "${corr}" == 'TRUE'; then
 	    analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	    ${resolution} -cpu ${cpu} -logp -corr \
-	    > ${sample}_chr${i}_${resolution}_logp_corr.txt
+	    > logp_corr/${sample}_chr${i}_${resolution}_logp_corr.txt
 	fi
 	analyzeHiC ${sample}_filtered/ -chr chr${i} -res \
 	${resolution} -cpu ${cpu} -logp \
-	> ${sample}_chr${i}_${resolution}_logp.txt
+	> logp/${sample}_chr${i}_${resolution}_logp.txt
     fi
 done
 

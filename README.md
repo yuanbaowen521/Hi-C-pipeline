@@ -5,7 +5,7 @@ Workflow includes four steps:
 1: raw data to mapped and filtered bam files
 2: bam files to contact matrices and contact maps 
 3: from bam files to list of significant interacctions 
-4: from bam files to TADs
+4: from normalized contact matrices to TADs
 
 Step one:
 From raw data to mapped and filtered bam files, this will employ
@@ -39,7 +39,10 @@ those without a significant neighboring interaction (owing to the DNA’s
 polymer property those are likely to be artifacts). 
 
 Step four:
-From 
+From the normalized contact matrix to list of topologically associating
+doamins. This will use the method proposed by RenBing's lab
+(http://chromosome.sdsc.edu/mouse/hi-c/download.html)
+
 
 
 

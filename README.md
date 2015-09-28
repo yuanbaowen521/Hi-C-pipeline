@@ -21,6 +21,9 @@ Step two:
 From the mapped reads to contact matrices and maps, this step utilize
 the software of homer.(http://homer.salk.edu/homer/interactions/index.html)
 Homer can generate interaction matrices, and then do normalization. 
+For data visualization, you can use either Java TreeView
+(http://sourceforge.net/projects/jtreeview/files/) or use R to
+plot the heatmap.
 
 Step three:
 From the mapped reads to list of significant interactions, which
@@ -43,20 +46,11 @@ From the normalized contact matrix to list of topologically associating
 doamins. This will use the method proposed by RenBing's lab
 (http://chromosome.sdsc.edu/mouse/hi-c/download.html)
 
-
-
-
 Prerequisite:
 To conduct the workflow, several softwares should be installed.
 1: HiCUP (http://www.bioinformatics.babraham.ac.uk/projects/download.html#hicup)
 2: The homer software
 3: A bioconductor package GOTHiC 
-4:
-
-
-
-
-
 
 
 
